@@ -1,57 +1,88 @@
 package membership;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import common.JDBConnect;
-/*
-DAO(Data Access Object) : 실제 데이터베이스에 접근하여 여러가지
-	CRUD작업을 하기위한 객체. 
-*/
-public class MemberDAO extends JDBConnect {
+
+public class MemberDAO extends JDBConnect{
+
+
+	public MemberDAO(ServletContext application) {
+		super(application);
+	}
+		
+	//회원가입
+	public int memberInsert(MemberDTO dto) {
+		int result = 0;
+		
+		try {
+			String sql ="insert into member values"
+		+"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, dto.getUserid());
+		psmt.setString(2, dto.getPass());
+		psmt.setString(3, dto.getName());
+		psmt.setString(4, dto.getGender());
+		psmt.setString(5, dto.getBirthday());
+		psmt.setString(6, dto.getZipcode());
+		psmt.setString(7, dto.getAddress1());
+		psmt.setString(8, dto.getAddress2());
+		psmt.setString(9, dto.getEmail());
+		psmt.setString(10, dto.getMobile());
+		//시간까지 나타내려고 Timestamp 사용
+		psmt.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
+
+		result = psmt.executeUpdate();
+
+
+		} catch (Exception e) {
+			System.out.println("회원가입에러");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
-	//인자가 4개인 부모의 생성자를 호출하여 DB에 연결한다. 
-    public MemberDAO(String drv, String url, String id, String pw) {
-        super(drv, url, id, pw);
-    }
-    
-    //application 내장객체만 매개변수로 전달하여 DB에 연결한다.
-    public MemberDAO(ServletContext application) {
-        super(application);
-    }
-
-    /*
-    사용자가 입력한 아이디, 패스워드를 통해 회원테이블을 확인한 후 
-    존재하는 정보인 경우 DTO객체에 그 정보를 담아 반환한다. 
-    */
-    public MemberDTO getMemberDTO(String uid, String upass) {
-        
-    	//DTO객체 생성
-    	MemberDTO dto = new MemberDTO();  
-    	//회원로그인을 위한 쿼리문 작성
-    	String query = "SELECT * FROM member WHERE id=? AND pass=?"; 
-
-        try {
-        	//쿼리문 실행을 위한 prepared객체 생성 및 인파라미터 설정
-            psmt = con.prepareStatement(query);
-            psmt.setString(1, uid);     
-            psmt.setString(2, upass);  
-            rs = psmt.executeQuery();  
-
-            //반환된 ResultSet객체를 통해 회원정보가 있는지 확인
-            if (rs.next()) {
-            	//정보가 있다면 DTO객체에 회원정보를 저장한다. 
-                dto.setId(rs.getString("id"));
-                dto.setPass(rs.getString("pass"));
-                dto.setName(rs.getString(3));
-                dto.setRegidate(rs.getString(4));
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return dto; 
-    }
+	//로그인
+	public MemberDTO memberLogin(String u_id, String u_pass) {
+		
+		MemberDTO dto = new MemberDTO();
+		
+		String query = "select * from member where id = ? and password = ?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, u_id);
+			psmt.setString(2, u_pass);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setUserid(rs.getString(2));
+				dto.setPass(rs.getString(3));
+				dto.setName(rs.getString(4));
+				dto.setGender(rs.getString(5));
+				dto.setBirthday(rs.getString(6));
+				dto.setZipcode(rs.getString(7));
+				dto.setAddress1(rs.getString(8));
+				dto.setAddress2(rs.getString(9));
+				dto.setEmail(rs.getString(10));
+				dto.setMobile(rs.getString(11));
+				dto.setSigndate(rs.getTimestamp(12));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
 }
+
+
 
 

@@ -73,7 +73,7 @@ public class ListController extends HttpServlet {
 		//페이지 번호를 생성하기 위한 유틸리티 클래스의 메서드 호출
 		//모델1 방식의 게시판에서 사용했던 메서드를 그대로 사용한다.
 		String pagingImg 
-			= BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "/mvcboard/listT.do");
+			= BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../mvcboard/listT.do");
 		//View로 전달할 데이터를 Map 컬렉션에 저장
 		map.put("pagingImg", pagingImg);//페이지번호
 		map.put("totalCount", totalCount);//전체 게시물 수

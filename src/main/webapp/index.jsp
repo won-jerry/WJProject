@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
 <script src="js/jquery.min.js"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
 </script>
 <link
 	href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900'
@@ -31,8 +30,8 @@
 					<li><a href="<%=request.getContextPath()%>/theme.jsp">테마</a></li>
 					<li><a href="<%=request.getContextPath()%>/reservation.jsp">예약</a></li>
 					<li><a href="<%=request.getContextPath()%>/mvcboard/listT.do">Q&A</a></li>
-					<li><a href="<%=request.getContextPath()%>/member/Login.jsp">Login</a></li>
-					<a class="banner_btn" href="<%=request.getContextPath()%>/member/Register.jsp">회원가입</a>
+					<li><a href="<%=request.getContextPath()%>/member/login.jsp">Login</a></li>
+					<a class="banner_btn" href="<%=request.getContextPath()%>/member/regist.jsp">회원가입</a>
 					<div class="clear"></div>
 				</ul>
 				<script type="text/javascript" src="js/responsive-nav.js"></script>

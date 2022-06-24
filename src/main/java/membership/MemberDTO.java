@@ -1,49 +1,121 @@
 package membership;
-/**
+/*
 DTO(Data Transfer Object) : JSP와 Java파일간에 데이터를 전달하기
 	위한 객체로 자바빈 규약에 의해 제작한다.
 	자바빈 규약은 115페이지를 참조. 
  */
+import java.sql.Timestamp;
+
+//DTO 클래스
 public class MemberDTO {
-	
-	//멤버변수 : member테이블의 컬럼과 동일하게 설정한다. 
-    private String id;
-    private String pass;
-    private String name;
-    private String regidate;
+	private String userid; //아이디
+	private String pass;  //비번
+	private String name; //이름
+	private String gender; //성별
+	private String birthday; //생년월일
+	private String zipcode; //주소
+	private String address1; //주소
+    private String address2; //상세주소
+    private String email; //이메일
+    private String mobile; //폰번호
+    private Timestamp signdate;
     
-    /*
-    생성자의 경우 꼭 필요한 경우가 아니라면 생성하지 않아도 된다. 
-    생성자를 생성하지 않는 경우 컴파일러에 의해 디폴트생성자(기본생성자)가
-    추가되기 때문이다. 
-     */
-    
-    //정보은닉된 멤버변수에 접근을 위해 public으로 정의된 getter/setter
-    public String getId() {
-        return id;
-    }
-	public void setId(String id) {
-        this.id = id;
-    }
-    public String getPass() {
-        return pass;
-    }
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getRegidate() {
-        return regidate;
-    }
-    public void setRegidate(String regidate) {
-        this.regidate = regidate;
-    }
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String moblie) {
+		this.mobile = moblie;
+	}
+
+	public Timestamp getSigndate() {
+		return signdate;
+	}
+
+	public void setSigndate(Timestamp signdate) {
+		this.signdate = signdate;
+	}
+
+	@Override
+	public String toString() {
+	// TODO Auto-generated method stub
+	    return super.toString();
+	}
 }
 
+    
+  
 
 
