@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -110,6 +111,7 @@
 			<div class="row mt-3" align="center">
 				<div class="col">
 					<ul class="pagination justify-content: center!important;">
+					<%= BoardPage.pagingStr(totalCount, pageSize,blockPage, pageNum, request.getRequestURI()) %>
 						<li class="page-item"><a class="page-link" href="#"> <i
 								class='bi bi-skip-backward-fill'></i>
 						</a></li>
@@ -119,11 +121,9 @@
 						<li class="page-item active"><a class="page-link" href="${ map.pagingImg }">1</a></li>
 						<li class="page-item"><a class="page-link" href="${ map.pagingImg }">2</a></li>
 						<li class="page-item"><a class="page-link" href="${ map.pagingImg }">3</a></li>
-						<li class="page-item"><a class="page-link" href="${ map.pagingImg }"> <i
-								class='bi bi-skip-end-fill'></i>
+						<li class="page-item"><a class="page-link" href="${ map.pagingImg }"> <i class='bi bi-skip-end-fill'></i>
 						</a></li>
-						<li class="page-item"><a class="page-link" href="${ map.pagingImg }"> <i
-								class='bi bi-skip-forward-fill'></i>
+						<li class="page-item"><a class="page-link" href="${ map.pagingImg }"> <i class='bi bi-skip-forward-fill'></i>
 						</a></li>
 					</ul>
 					<button type="button" style="float:right" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/mvcboard/writeT.do';">글쓰기</button>
