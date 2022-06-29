@@ -11,6 +11,12 @@ import common.JDBConnect;
 public class MemberDAO extends JDBConnect{
 
 
+	
+	
+	public MemberDAO() {
+		super();
+	}
+
 	public MemberDAO(ServletContext application) {
 		super(application);
 	}
@@ -52,7 +58,7 @@ public class MemberDAO extends JDBConnect{
 		
 		MemberDTO dto = new MemberDTO();
 		
-		String query = "select * from member where id = ? and password = ?";
+		String query = "select * from member where userid = ? and pass = ?";
 		
 		try {
 			psmt = con.prepareStatement(query);
@@ -61,17 +67,17 @@ public class MemberDAO extends JDBConnect{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				dto.setUserid(rs.getString(2));
-				dto.setPass(rs.getString(3));
-				dto.setName(rs.getString(4));
-				dto.setGender(rs.getString(5));
-				dto.setBirthday(rs.getString(6));
-				dto.setZipcode(rs.getString(7));
-				dto.setAddress1(rs.getString(8));
-				dto.setAddress2(rs.getString(9));
-				dto.setEmail(rs.getString(10));
-				dto.setMobile(rs.getString(11));
-				dto.setSigndate(rs.getTimestamp(12));
+				dto.setUserid(rs.getString(1));
+				dto.setPass(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setGender(rs.getString(4));
+				dto.setBirthday(rs.getString(5));
+				dto.setZipcode(rs.getString(6));
+				dto.setAddress1(rs.getString(7));
+				dto.setAddress2(rs.getString(8));
+				dto.setEmail(rs.getString(9));
+				dto.setMobile(rs.getString(10));
+				dto.setSigndate(rs.getTimestamp(11));
 			}
 			
 		} catch (Exception e) {
@@ -81,8 +87,78 @@ public class MemberDAO extends JDBConnect{
 		return dto;
 	}
 	
+	public MemberDTO memberSelect(String id, String pw) {
+		MemberDTO dto = new MemberDTO(); // 객체생성
+		try {
+			System.out.println("id:" + id);
+			System.out.println("pw:" + pw);
+
+			if (pw.equals("")) {
+				// 아이디가 맞는지 확인용
+				String sql = "select * from member where userid = ?";
+
+				// Statement 객체 생성
+				psmt = con.prepareStatement(sql);
+				psmt.setString(1, id);
+
+				// SQL문(SELECT)을 전달해서 실행 후 결과 받기
+        /* SELECT문의 경우, executeQuery 메소드를 사용 */
+				rs = psmt.executeQuery();
+
+				// 조회결과의 ResultSet을 VO객체로 초기화
+		    /* 조회결과가 한개인 경우 => Member객체를 이용 */
+				if (rs.next()) {
+
+					dto.setUserid(rs.getString(1));
+					dto.setPass(rs.getString(2));
+					dto.setName(rs.getString(3));
+					dto.setGender(rs.getString(4));
+					dto.setBirthday(rs.getString(5));
+					dto.setZipcode(rs.getString(6));
+					dto.setAddress1(rs.getString(7));
+					dto.setAddress2(rs.getString(8));
+					dto.setEmail(rs.getString(9));
+					dto.setMobile(rs.getString(10));
+					dto.setSigndate(rs.getTimestamp(11));
+
+				}
+
+			} else {
+				// 아이디와 비번이 맞는지 확인용
+				String sql = "select * from member where userid = ? and pass = ?";
+
+				psmt = con.prepareStatement(sql);
+				psmt.setString(1, id);
+				psmt.setString(2, pw);
+				rs = psmt.executeQuery();
+
+				// rs.next(); // 해당결과는 한행뿐이기 때문에 if문을 쓰지않음
+				if (rs.next()) {
+
+					dto.setUserid(rs.getString(1));
+					dto.setPass(rs.getString(2));
+					dto.setName(rs.getString(3));
+					dto.setGender(rs.getString(4));
+					dto.setBirthday(rs.getString(5));
+					dto.setZipcode(rs.getString(6));
+					dto.setAddress1(rs.getString(7));
+					dto.setAddress2(rs.getString(8));
+					dto.setEmail(rs.getString(9));
+					dto.setMobile(rs.getString(10));
+					dto.setSigndate(rs.getTimestamp(11));
+
+				}
+			}
+			
+
+		} catch (Exception e) {
+			System.out.println("로그인에러"+e.getMessage());
+			e.getStackTrace();
+			
+		}
+
+		return dto;
+	}
+
 }
-
-
-
-
+	

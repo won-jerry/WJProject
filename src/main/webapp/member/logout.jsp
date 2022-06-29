@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%
 // 로그아웃 처리를 위한 방법
-session.removeAttribute("UserId");
-session.removeAttribute("UserName");
+session.removeAttribute("userid");
+session.removeAttribute("name");
 
 session.invalidate();
 
-response.sendRedirect("./login.jsp");
+response.sendRedirect("../member/login.do");
 %>

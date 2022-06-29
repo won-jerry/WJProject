@@ -26,12 +26,13 @@ if(memberDTO.getUserid() != null) {
 	Session 영역에 아이디와 이름을 저장한다.
 	Session 영역은 페이지를 이동하더라도 웹 브라우저를 닫을 때까지 영역이 공유되어 접근할 수 있다.
 	*/
-	session.setAttribute("UserId", memberDTO.getUserid());
-	session.setAttribute("UserName", memberDTO.getName());
+	session.setAttribute("userid", memberDTO.getUserid());
+	session.setAttribute("name", memberDTO.getName());
 	// 로그인 페이지로 이동한다.
-	response.sendRedirect("../login.jsp");
+	
+	response.sendRedirect("../index.jsp");
 } else {
-	JSFunction.alertBack("로그인 오류입니다.", out);
+	JSFunction.alertBack("아이디 및 비밀번호가 맞지 않습니다.", out);
 }
 %>
 

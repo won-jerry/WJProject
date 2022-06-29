@@ -11,13 +11,39 @@
 <link href="<%=request.getContextPath()%>/css/flexslider.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
-<script src="js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+<script>
+	function setThumbnail(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "col-lg-6");
+			document.querySelector("div#image_container").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	</script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview').src = "";
+	  }
+	}
 </script>
 <link
-	href='<%=request.getContextPath()%>/http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900'
+	href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900'
 	rel='stylesheet' type='text/css'>
 </head>
+
 <body>
 	<div class="header">
 		<div class="container">
@@ -28,15 +54,43 @@
 					src="<%=request.getContextPath()%>/images/nav_icon.png" alt="" />
 				</a>
 				<ul class="nav" id="nav">
-					<li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href="<%=request.getContextPath()%>/about.jsp">KOSMO
-							ESCAPE</a></li>
-					<li><a href="<%=request.getContextPath()%>/theme.jsp">테마</a></li>
-					<li><a href="<%=request.getContextPath()%>/reservation.jsp">예약</a></li>
-					<li><a href="<%=request.getContextPath()%>/mvcboard/listT.do">Q&A</a></li>
-					<li><a href="<%=request.getContextPath()%>/member/Login.jsp">Login</a></li>
-					<a class="banner_btn" href="<%=request.getContextPath()%>/member/Register.jsp">회원가입</a>
-					<div class="clear"></div>
+				<c:choose>
+					<c:when test="${empty USERID}">
+						<li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+						<li><a href="<%=request.getContextPath()%>/about.jsp">KOSMO
+								ESCAPE</a></li>
+						<li><a href="<%=request.getContextPath()%>/theme.jsp">테마</a></li>
+						<li><a href="<%=request.getContextPath()%>/reservation.jsp">예약</a></li>
+						<li class="current"><a href="<%=request.getContextPath()%>/isLoggedIn.jsp">후기게시판</a></li>
+						<li><a href="<%=request.getContextPath()%>/member/login.do">Login</a></li>
+						<a class="banner_btn"
+							href="<%=request.getContextPath()%>/member/regist.jsp">회원가입</a>
+						<div class="clear"></div>
+					</c:when>
+					<c:when test="${USERID eq 'admin'}">
+						<li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+						<li><a href="<%=request.getContextPath()%>/about.jsp">KOSMO
+								ESCAPE</a></li>
+						<li><a href="<%=request.getContextPath()%>/theme.jsp">테마</a></li>
+						<li><a href="<%=request.getContextPath()%>/reservation.jsp">예약</a></li>
+						<li class="current"><a href="<%=request.getContextPath()%>/isLoggedIn.jsp">후기게시판</a></li>
+						<li><a href="<%=request.getContextPath()%>/member/logout.do">Logout</a></li>
+						<a class="banner_btn" href="<%=request.getContextPath()%>/admin/index.jsp">관리자 페이지</a>
+						<div class="clear"></div>
+					</c:when>
+					<c:otherwise>
+						<li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+						<li><a href="<%=request.getContextPath()%>/about.jsp">KOSMO
+								ESCAPE</a></li>
+						<li><a href="<%=request.getContextPath()%>/theme.jsp">테마</a></li>
+						<li><a href="<%=request.getContextPath()%>/reservation.jsp">예약</a></li>
+						<li class="current"><a href="<%=request.getContextPath()%>/isLoggedIn.jsp">후기게시판</a></li>
+						<li><a href="<%=request.getContextPath()%>/member/logout.do">Logout</a></li>
+						<a class="banner_btn"
+							href="<%=request.getContextPath()%>/member/modify.do">회원정보수정</a>
+						<div class="clear"></div>
+					</c:otherwise>
+				</c:choose>
 				</ul>
 				<script type="text/javascript"
 					src="<%=request.getContextPath()%>/js/responsive-nav.js"></script>
@@ -77,23 +131,15 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td colspan="3" height="100">${ dto.content } <br /> <c:choose>
-							<c:when test="${fileType == 'image' }">
-								<img src="<%=request.getContextPath()%>/Uploads/${dto.sfile }" max-width="300px;" />
-							</c:when>
-							<c:when test="${fileType == 'music' }">
-								<audio src="<%=request.getContextPath()%>/Uploads/${dto.sfile }" controls></audio>
-							</c:when>
-						</c:choose>
+					<td colspan="3" height="100">${ dto.content }<br /> 
+								<img src="../Uploads/${dto.sfile }" width="500px;" />
 					</td>
 				</tr>
 				<tr>
 					<td>첨부파일</td>
 					<td>
 					<c:if test="${ not empty dto.ofile }">${ dto.ofile }<a href="<%=request.getContextPath()%>/mvcboard/downloadT.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
-						</c:if>
-						<button type="button" id="fileDelete" data-bs-toggle="modal"
-							data-bs-target="#myModal">첨부파일삭제</button>
+					</c:if>
 					</td>
 					<td>다운로드수</td>
 					<td>${ dto.downcount }</td>
@@ -108,25 +154,25 @@
 				<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/mvcboard/passT.do?mode=delete&idx=${ param.idx }';">삭제하기</button>
 				<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/mvcboard/listT.do';">목록보기</button>
 			</div>
+			<tr><br /></tr>
 		</div>
 	</form>
 	<div class="footer">
-		<div class="footer_bottom">
-			<div class="follow-us">
-				<a class="fa fa-facebook social-icon" href="#"></a> <a
-					class="fa fa-twitter social-icon" href="#"></a> <a
-					class="fa fa-linkedin social-icon" href="#"></a> <a
-					class="fa fa-google-plus social-icon" href="#"></a>
-			</div>
-			<div class="copy">
-				<p>
-					Copyright &copy; 2015 Company Name. Design by <a
-						href="http://www.templategarden.com" rel="nofollow">TemplateGarden</a>
-				</p>
+			<div class="footer_bottom">
+				<div class="follow-us">
+					<a class="fa fa-facebook social-icon" href="https://www.ikosmo.co.kr/"></a> <a
+						class="fa fa-twitter social-icon" href="https://www.ikosmo.co.kr/"></a> <a
+						class="fa fa-linkedin social-icon" href="https://www.ikosmo.co.kr/"></a> <a
+						class="fa fa-google-plus social-icon" href="https://www.ikosmo.co.kr/"></a>
+				</div>
+				<div class="copy">
+					<p>
+						Copyright &copy; 2022 KOSMO ESCAPE CAFE. Design by <a href="https://www.ikosmo.co.kr/" rel="nofollow">KOSMO</a>
+					</p>
+				</div>
 			</div>
 		</div>
-	</div>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery.flexslider.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.flexslider.js"></script>
 </body>
 </html>

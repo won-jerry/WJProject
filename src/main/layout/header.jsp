@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-
-<style type="text/css">
-nav .navbar-nav a.nav-link {
-	font-weight: bold;
-	color: #2c3e50 !important;
-}
-
-nav .navbar-nav  a.nav-link.active {
-	color: #42b983 !important;
-}
-
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One</title>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/css/flexslider.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
+<script src="js/jquery.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<link
+	href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900'
+	rel='stylesheet' type='text/css'>
+</head>
 </head>
 <body>
 

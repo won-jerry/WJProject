@@ -104,7 +104,7 @@
 		<servlet-name>MVCBoardWrite</servlet-name>
 		<url-pattern>/mvcboard/writeT.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>MVCBoardView</servlet-name>
 		<servlet-class>model2.mvcboard.ViewController</servlet-class>
@@ -113,7 +113,7 @@
 		<servlet-name>MVCBoardView</servlet-name>
 		<url-pattern>/mvcboard/viewT.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>MVCBoardDown</servlet-name>
 		<servlet-class>model2.mvcboard.DownloadController</servlet-class>
@@ -122,7 +122,7 @@
 		<servlet-name>MVCBoardDown</servlet-name>
 		<url-pattern>/mvcboard/downloadT.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>MVCBoardPass</servlet-name>
 		<servlet-class>model2.mvcboard.PassController</servlet-class>
@@ -140,6 +140,52 @@
 		<servlet-name>MVCBoardEdit</servlet-name>
 		<url-pattern>/mvcboard/editT.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MVCBoardIdCheck</servlet-name>
+		<servlet-class>membership.IdCheckController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardIdCheck</servlet-name>
+		<url-pattern>/member/idCheck.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MVCBoardLogin</servlet-name>
+		<servlet-class>membership.LoginController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardLogin</servlet-name>
+		<url-pattern>/member/login.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MVCBoardLogout</servlet-name>
+		<servlet-class>membership.LogoutController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardLogout</servlet-name>
+		<url-pattern>/member/logout.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MVCBoardModify</servlet-name>
+		<servlet-class>membership.ModifyController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardModify</servlet-name>
+		<url-pattern>/member/modify.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>link01Controller</servlet-name>
+		<servlet-class>servlet.Link01Controller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>link01Controller</servlet-name>
+		<url-pattern>/servlet/link01.do</url-pattern>
+	</servlet-mapping>
+
 
 	<context-param>
 		<param-name>maxPostSize</param-name>

@@ -16,7 +16,7 @@
 <script src="<%=request.getContextPath()%>/https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./js/jquery.min.js"></script>
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
     $(function() {
         //라디오를 버튼모양으로 바꿔주는 jQuery UI
         $("input[type=radio]").checkboxradio({
@@ -57,14 +57,14 @@
     function registValidate(form){
      	var id_val = document.getElementById("id_validate");
      	var p_check = document.getElementById("pass_check");
-     	if(form.user_id.value == "") {
+     	if(form.userid.value == "") {
     		alert("아이디를 입력하세요.");
-        	form.user_id.focus();
+        	form.userid.focus();
         	return false;
     	} else {
     		if (id_val.innerHTML != "사용가능합니다.") {
     		alert("아이디를 확인하세요.");
-    		form.user_id.focus();
+    		form.userid.focus();
     		return false;
     		} 
     	}
@@ -119,7 +119,6 @@
         	form.email1.focus();
         	return false;
      	}
-     	/* 
      	if(form.email1.value == "") {
      		alert("이메일을 입력하세요.");
         	form.email1.focus();
@@ -130,7 +129,6 @@
         	form.email2.focus();
         	return false;
      	} 
-     	*/
      	if(form.mobile1.value == "" || form.mobile2.value == "" || form.mobile3.value == "") {
      		alert("휴대번호를 입력하세요.");
         	form.mobile1.focus();
@@ -144,14 +142,14 @@
     function idCheck(form){
     	var id_val = document.getElementById("id_validate");
     	// 아이디 입력 X
-    	if(form.user_id.value == "") {
+    	if(form.userid.value == "") {
     		alert("아이디 입력 후 중복확인하세요.");
-    		form.user_id.focus();
+    		form.userid.focus();
     		
     		// 아이디 입력 O
     	} else {
     		// 아이디 값을 넣어서 검증할 변수 선언
-    		var u_id = form.user_id.value;
+    		var u_id = form.userid.value;
     		
     		// 아이디가 8 ~ 16자리인지 확인
     		if(u_id.length >= 8 && u_id.length <= 16) {
@@ -171,11 +169,11 @@
     				/* alert("영문과 숫자만 입력하세요."); */
     				id_val.innerHTML = "영문과 숫자만 입력하세요.";
     				id_val.style.color = "red";
-    				form.user_id.focus();
+    				form.userid.focus();
     			} else {
     				// check가 true이면 중복확인 검사 팝업 창 띄우기
     				
-    				window.open("id_duplication.jsp?id=" + form.user_id.value, "idover", "width=500px, height=300px");
+    				window.open("idCheck.jsp?id=" + form.userid.value, "idover", "width=500px, height=300px");
 					
     				// 영문, 숫자만 있으므로 사용가능하다는 문구 출력
 					id_val.innerHTML = "사용가능합니다.";
@@ -188,7 +186,7 @@
     			/* alert("8~16 자리로 입력하세요.") */
     			id_val.innerHTML = "8~16 자리로 입력하세요.";
     			id_val.style.color = "red";
-    			form.user_id.focus();
+    			form.userid.focus();
     		}
     	}
     	return false;
@@ -293,10 +291,10 @@
 </head>
 <body>
 <div class="header">
-		<div class="container">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" style="width: 150px" /></a>
-		</div>
+	<div class="container">
+		<a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" style="width: 150px" /></a>
 	</div>
+</div>
 <form action="registProcess.jsp" method="post" name="registFrm" onsubmit="return registValidate(this)">
 <div class="AllWrap">
     <div class="wrap_regiform">
@@ -359,7 +357,14 @@
                 <td><span class="red">*</span> 생년월일</td>
                 <td style="padding: 0px 0 5px 5px;">
                     <input type="text" class="w02" name="birthday" id="birthday" value="" />
-                    <img src="<%=request.getContextPath()%>/images/pick.jpg" id="pick" class="pick" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <span class="comment">
+                        ※ YYYYMMDD 형식으로 입력해주세요. (예: 19930320)
+                    </span>
                 </td>
             </tr>
             <tr>

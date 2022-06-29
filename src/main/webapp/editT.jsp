@@ -69,7 +69,6 @@
 <!-- 기존의 서버에 저장된 파일명 -->
 <input type="hidden" name="prevSfile" value="${ dto.sfile }" />
 
-검증된패스워드:${pass }    
 <table class="table table-bordered" border="2" width="90%">
     <tr>
         <td>작성자</td>
@@ -126,22 +125,21 @@
 </table>    
 </form>
 <div class="footer">
-	<div class="footer_bottom">
-		<div class="follow-us">
-			<a class="fa fa-facebook social-icon" href="#"></a> <a
-				class="fa fa-twitter social-icon" href="#"></a> <a
-				class="fa fa-linkedin social-icon" href="#"></a> <a
-				class="fa fa-google-plus social-icon" href="#"></a>
+			<div class="footer_bottom">
+				<div class="follow-us">
+					<a class="fa fa-facebook social-icon" href="https://www.ikosmo.co.kr/"></a> <a
+						class="fa fa-twitter social-icon" href="https://www.ikosmo.co.kr/"></a> <a
+						class="fa fa-linkedin social-icon" href="https://www.ikosmo.co.kr/"></a> <a
+						class="fa fa-google-plus social-icon" href="https://www.ikosmo.co.kr/"></a>
+				</div>
+				<div class="copy">
+					<p>
+						Copyright &copy; 2022 KOSMO ESCAPE CAFE. Design by <a href="https://www.ikosmo.co.kr/" rel="nofollow">KOSMO</a>
+					</p>
+				</div>
+			</div>
 		</div>
-		<div class="copy">
-			<p>
-				Copyright &copy; 2015 Company Name. Design by <a
-					href="http://www.templategarden.com" rel="nofollow">TemplateGarden</a>
-			</p>
-		</div>
-	</div>
-</div>
-	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery.flexslider.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.flexslider.js"></script>
 </body>
 </html>
